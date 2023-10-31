@@ -1,0 +1,36 @@
+running = True
+
+
+# encodes the password given by the user
+def encode(user_pass):
+    encoded_list = []
+    for char in user_pass:
+        num = int(char)
+        # iterates 3 times to increment the character by 3
+        for i in range(0, 2):
+            num += 1
+            if num > 9:
+                num = 0
+        # appends the new character to a list of numbers
+        encoded_list.append(str(num))
+    # joins together the list to create an encoded string
+    encoded_str = ''.join(encoded_list)
+    return encoded_str
+
+
+if __name__ == '__main__':
+    while running:
+        # prints the main menu
+        print('Menu\n-------------')
+        print('1. Encode\n2. Decode\n3. Quit\n')
+        option = input('Please enter an option: ')
+        # performs different actions based on user's selection
+        if option == '1':
+            password = input('Please enter your password to encode: ')
+            encoded_password = encode(password)
+            print('Your password has been encoded and stored!\n')
+        elif option == '2':
+            print(f'The encoded password is {encoded_password}, and the original password is {password}')
+        # quits the program
+        elif option == '3':
+            running = False
