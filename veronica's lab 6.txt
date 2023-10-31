@@ -1,13 +1,18 @@
 running = True
+ogpassword = ""
+encoded_password = ""
 
 
 # encodes the password given by the user
 def encode(user_pass):
+    global ogpassword
+    global encoded_password
+    ogpassword = str(user_pass)
     encoded_list = []
     for char in user_pass:
         num = int(char)
         # iterates 3 times to increment the character by 3
-        for i in range(0, 2):
+        for i in range(0, 3):
             num += 1
             if num > 9:
                 num = 0
@@ -15,10 +20,17 @@ def encode(user_pass):
         encoded_list.append(str(num))
     # joins together the list to create an encoded string
     encoded_str = ''.join(encoded_list)
+    encoded_password = encoded_str
     return encoded_str
 
 
-if __name__ == '__main__':
+
+#  avas changes below
+def password_deocoder():
+    return f'The encoded password is {encoded_password}, and the original password is {ogpassword}'
+
+
+def main():
     while running:
         # prints the main menu
         print('Menu\n-------------')
@@ -26,11 +38,15 @@ if __name__ == '__main__':
         option = input('Please enter an option: ')
         # performs different actions based on user's selection
         if option == '1':
-            password = input('Please enter your password to encode: ')
-            encoded_password = encode(password)
+            pas = input('Please enter your password to encode: ')
+            encode(pas)
             print('Your password has been encoded and stored!\n')
         elif option == '2':
-            print(f'The encoded password is {encoded_password}, and the original password is {password}')
+            print(password_deocoder())
         # quits the program
         elif option == '3':
-            running = False
+            break
+
+
+if __name__ == '__main__':
+    main()
